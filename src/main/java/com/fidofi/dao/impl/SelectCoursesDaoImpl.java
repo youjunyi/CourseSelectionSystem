@@ -20,7 +20,6 @@ import java.util.List;
 @Repository
 @Transactional
 public class SelectCoursesDaoImpl implements SelectCoursesDao {
-    private final String field = "Course .courseId,Course .category,Course.courseName,Course .courseTime,Course .credit,Course .selectNum,Course .teacherName,Course .previousId,Course .term,Course .studentNum";
 
     @Autowired
     private SessionFactory sessionFactory;
