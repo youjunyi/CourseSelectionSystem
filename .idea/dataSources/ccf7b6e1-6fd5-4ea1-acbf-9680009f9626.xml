@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="courseselection@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.0">
+    <root id="1"/>
+    <schema id="2" parent="1" name="courseselection">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="busmanagement"/>
+    <schema id="4" parent="1" name="db_librarysys"/>
+    <schema id="5" parent="1" name="examination_system"/>
+    <schema id="6" parent="1" name="fidodemo"/>
+    <schema id="7" parent="1" name="information_schema"/>
+    <schema id="8" parent="1" name="library"/>
+    <schema id="9" parent="1" name="message"/>
+    <schema id="10" parent="1" name="mysql"/>
+    <schema id="11" parent="1" name="performance_schema"/>
+    <schema id="12" parent="1" name="productsystem"/>
+    <schema id="13" parent="1" name="schedulemanagement"/>
+    <schema id="14" parent="1" name="seckill"/>
+    <schema id="15" parent="1" name="shiyanloudb"/>
+    <schema id="16" parent="1" name="springbootdb"/>
+    <schema id="17" parent="1" name="springboot_order"/>
+    <schema id="18" parent="1" name="taotao"/>
+    <schema id="19" parent="1" name="testdb"/>
+    <schema id="20" parent="1" name="toutiao"/>
+    <schema id="21" parent="1" name="tttmall"/>
+    <schema id="22" parent="1" name="weibo"/>
+    <table id="23" parent="2" name="category"/>
+    <table id="24" parent="2" name="course"/>
+    <table id="25" parent="2" name="majorcourses"/>
+    <table id="26" parent="2" name="selectcourses"/>
+    <table id="27" parent="2" name="student"/>
+    <column id="28" parent="23" name="categoryId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="29" parent="23" name="categoryName">
+      <Position>2</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="30" parent="23" name="PRIMARY">
+      <ColNames>categoryId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="31" parent="24" name="categoryId">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="32" parent="24" name="courseId">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="33" parent="24" name="courseName">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="24" name="credit">
+      <Position>4</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="35" parent="24" name="teacherName">
+      <Position>5</Position>
+      <DataType>varchar(6)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="36" parent="24" name="previousId">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="37" parent="24" name="studentNum">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="38" parent="24" name="courseTime">
+      <Position>8</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="39" parent="24" name="term">
+      <Position>9</Position>
+      <DataType>bit(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>b&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="40" parent="24" name="selectNum">
+      <Position>10</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="41" parent="24" name="FK_CATEGORY">
+      <ColNames>categoryId</ColNames>
+    </index>
+    <index id="42" parent="24" name="FK_PREVIOUS_ID">
+      <ColNames>previousId</ColNames>
+    </index>
+    <key id="43" parent="24" name="PRIMARY">
+      <ColNames>courseId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="44" parent="24" name="FK_CATEGORY">
+      <ColNames>categoryId</ColNames>
+      <RefSchemaName>courseselection</RefSchemaName>
+      <RefTableName>category</RefTableName>
+      <RefColNames>categoryId</RefColNames>
+    </foreign-key>
+    <foreign-key id="45" parent="24" name="FK_PREVIOUS_ID">
+      <ColNames>previousId</ColNames>
+      <RefSchemaName>courseselection</RefSchemaName>
+      <RefTableName>course</RefTableName>
+      <RefColNames>courseId</RefColNames>
+    </foreign-key>
+    <column id="46" parent="25" name="studentId">
+      <Position>1</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="47" parent="25" name="courseId">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="48" parent="25" name="score">
+      <Position>3</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="49" parent="25" name="FK_MAJOR_CID">
+      <ColNames>courseId</ColNames>
+    </index>
+    <key id="50" parent="25" name="PRIMARY">
+      <ColNames>studentId
+courseId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="51" parent="25" name="FK_MAJOR_SID">
+      <ColNames>studentId</ColNames>
+      <RefSchemaName>courseselection</RefSchemaName>
+      <RefTableName>student</RefTableName>
+      <RefColNames>studentId</RefColNames>
+    </foreign-key>
+    <foreign-key id="52" parent="25" name="FK_MAJOR_CID">
+      <ColNames>courseId</ColNames>
+      <RefSchemaName>courseselection</RefSchemaName>
+      <RefTableName>course</RefTableName>
+      <RefColNames>courseId</RefColNames>
+    </foreign-key>
+    <column id="53" parent="26" name="studentId">
+      <Position>1</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="54" parent="26" name="courseId">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="55" parent="26" name="FK_STUDENT_COURSE_CID">
+      <ColNames>courseId</ColNames>
+    </index>
+    <key id="56" parent="26" name="PRIMARY">
+      <ColNames>studentId
+courseId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="57" parent="26" name="FK_STUDENT_COURSE_SID">
+      <ColNames>studentId</ColNames>
+      <RefSchemaName>courseselection</RefSchemaName>
+      <RefTableName>student</RefTableName>
+      <RefColNames>studentId</RefColNames>
+    </foreign-key>
+    <foreign-key id="58" parent="26" name="FK_STUDENT_COURSE_CID">
+      <ColNames>courseId</ColNames>
+      <RefSchemaName>courseselection</RefSchemaName>
+      <RefTableName>course</RefTableName>
+      <RefColNames>courseId</RefColNames>
+    </foreign-key>
+    <column id="59" parent="27" name="studentId">
+      <Position>1</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="60" parent="27" name="studentName">
+      <Position>2</Position>
+      <DataType>varchar(5)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="61" parent="27" name="studentPassword">
+      <Position>3</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="62" parent="27" name="studentSex">
+      <Position>4</Position>
+      <DataType>bit(1)|0</DataType>
+      <DefaultExpression>b&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="63" parent="27" name="studentMajor">
+      <Position>5</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="64" parent="27" name="address">
+      <Position>6</Position>
+      <DataType>varchar(150)|0</DataType>
+    </column>
+    <column id="65" parent="27" name="phone">
+      <Position>7</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <key id="66" parent="27" name="PRIMARY">
+      <ColNames>studentId</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
