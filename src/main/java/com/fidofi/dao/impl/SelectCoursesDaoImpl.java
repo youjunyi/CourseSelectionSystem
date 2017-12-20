@@ -69,10 +69,43 @@ public class SelectCoursesDaoImpl implements SelectCoursesDao {
      */
     public List<Student> getStudentLists(Integer courseId) {
         String sql = "SELECT * from Student ,Selectcourses where Student .studentId=Selectcourses .studentId and Selectcourses .courseId=:n";
-
         Query query = this.getCurrentSession().createSQLQuery(sql).addEntity(Student.class);
         query.setParameter("n", courseId);
         List<Student> studentList = query.list();
         return studentList;
+    }
+
+    /**
+     * 返回学生的选课课程数量，用于选课的条件判断
+     *
+     * @param studentId
+     * @return
+     */
+    public Integer courseNum(String studentId) {
+        String hql = "SELECT COUNT(courseId) FROM Selectcourses  WHERE studentId=:n";
+        Query query = this.getCurrentSession().createQuery(hql);
+        query.setParameter("n", studentId);
+        List<Long> list = query.list();
+        if (list != null && list.size() > 0) {
+            return list.get(0).intValue();
+        }
+        return 0;
+    }
+
+    /**
+     * 返回学生所选课程的总学分，用于选课的条件判断
+     *
+     * @param studentId
+     * @return
+     */
+    public Double courseCreditNum(String studentId) {
+        String hql = "SELECT SUM(credit) FROM Course WHERE courseId IN(SELECT courseId FROM Selectcourses WHERE studentId=:n)";
+        Query query = this.getCurrentSession().createQuery(hql);
+        query.setParameter("n", studentId);
+        List<Double> list = query.list();
+        if (list != null && list.size() > 0) {
+            return list.get(0);
+        }
+        return 0D;
     }
 }

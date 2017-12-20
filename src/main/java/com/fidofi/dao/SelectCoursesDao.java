@@ -20,4 +20,8 @@ public interface SelectCoursesDao {
     public List<Course> getStudentCourses(String studentId);
 
     public List<Student> getStudentLists(Integer courseId);
+
+    public Integer courseNum(String studentId);
+
+    public Double courseCreditNum(String studentId);
 }

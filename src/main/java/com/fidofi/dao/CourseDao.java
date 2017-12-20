@@ -35,5 +35,7 @@ public interface CourseDao {
 
     public int findCount();
 
-    public Course getCourseById(Integer courseId);
+    public Course getPreviousCourse(Integer courseId);
+
+//    public Course getCourseById(Integer courseId);
 }

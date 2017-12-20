@@ -37,11 +37,9 @@ public class StudentDaoImplTest extends TestCase {
            studentDao.save(student);
     }
 
-   // @Test
+   //@Test
     public void testUpdate() throws Exception {
-         Student student=studentDao.selectById("3215747653");
-         student.setStudentName("王五");
-         studentDao.update(student);
+
     }
 
     //@Test

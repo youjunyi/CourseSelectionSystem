@@ -43,17 +43,17 @@ public class CourseDaoImplTest extends TestCase {
     }
 
     //@Test
-    public void testUpdate() throws Exception {
-        Course course=courseDao.getCourseById(2);
-        course.setCourseName("数据结构");
-        courseDao.update(course);
-    }
-
-   // @Test
-    public void testDelete() throws Exception {
-      Course course=courseDao.getCourseById(2);
-      courseDao.delete(course);
-    }
+//    public void testUpdate() throws Exception {
+//        Course course=courseDao.getCourseById(2);
+//        course.setCourseName("数据结构");
+//        courseDao.update(course);
+//    }
+//
+//   // @Test
+//    public void testDelete() throws Exception {
+//      Course course=courseDao.getCourseById(2);
+//      courseDao.delete(course);
+//    }
 
    // @Test
     public void testSelectCourses() throws Exception {
@@ -111,9 +111,9 @@ public class CourseDaoImplTest extends TestCase {
         System.out.println(count);
     }
 
-    //@Test
-    public void testGetCourseById() throws Exception {
-        Course course=courseDao.getCourseById(1);
-        System.out.println(course);
-    }
+//    //@Test
+//    public void testGetCourseById() throws Exception {
+//        Course course=courseDao.getCourseById(1);
+//        System.out.println(course);
+//    }
 }

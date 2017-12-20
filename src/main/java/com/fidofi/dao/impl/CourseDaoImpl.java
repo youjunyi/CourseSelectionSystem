@@ -27,6 +27,7 @@ public class CourseDaoImpl extends HibernateDaoSupport implements CourseDao {
     private Session getCurrentSession() {
         return this.sessionFactory.getCurrentSession();
     }
+
     /**
      * 新增课程
      *
@@ -55,7 +56,7 @@ public class CourseDaoImpl extends HibernateDaoSupport implements CourseDao {
      * @param course
      */
     public void delete(Course course) {
-       this.getCurrentSession().delete(course);
+        this.getCurrentSession().delete(course);
     }
 
     /**
@@ -65,11 +66,11 @@ public class CourseDaoImpl extends HibernateDaoSupport implements CourseDao {
      * @return
      */
     public List<Course> selectCourses(Page page) {
-        String hql="from Course";
-        Query query=this.getCurrentSession().createQuery(hql);
+        String hql = "from Course";
+        Query query = this.getCurrentSession().createQuery(hql);
         query.setFirstResult(page.getStartIndex());
         query.setMaxResults(page.getPageSize());
-        List<Course> courseList =query.list();
+        List<Course> courseList = query.list();
         return courseList;
     }
 
@@ -81,14 +82,14 @@ public class CourseDaoImpl extends HibernateDaoSupport implements CourseDao {
      * @return
      */
     public List<Course> selectByTeacher(Page page, String teacherName) {
-        String hql="from Course where teacherName=:n";
-        Query query=this.getCurrentSession().createQuery(hql);
+        String hql = "from Course where teacherName=:n";
+        Query query = this.getCurrentSession().createQuery(hql);
         //条件查询
-        query.setParameter("n",teacherName);
+        query.setParameter("n", teacherName);
         //分页设置
         query.setFirstResult(page.getStartIndex());
         query.setMaxResults(page.getPageSize());
-        List<Course> courseList =query.list();
+        List<Course> courseList = query.list();
         return courseList;
 
     }
@@ -101,14 +102,14 @@ public class CourseDaoImpl extends HibernateDaoSupport implements CourseDao {
      * @return
      */
     public List<Course> selectByCategory(Page page, Integer categoryId) {
-        String hql="from Course where categoryId=:n";
-        Query query=this.getCurrentSession().createQuery(hql);
+        String hql = "from Course where categoryId=:n";
+        Query query = this.getCurrentSession().createQuery(hql);
         //条件查询
-        query.setParameter("n",categoryId);
+        query.setParameter("n", categoryId);
         //分页设置
         query.setFirstResult(page.getStartIndex());
         query.setMaxResults(page.getPageSize());
-        List<Course> courseList =query.list();
+        List<Course> courseList = query.list();
         return courseList;
     }
 
@@ -120,14 +121,14 @@ public class CourseDaoImpl extends HibernateDaoSupport implements CourseDao {
      * @return
      */
     public List<Course> selectByCourseName(Page page, String courseName) {
-        String hql="from Course where courseName=:n";
-        Query query=this.getCurrentSession().createQuery(hql);
+        String hql = "from Course where courseName=:n";
+        Query query = this.getCurrentSession().createQuery(hql);
         //条件查询
-        query.setParameter("n",courseName);
+        query.setParameter("n", courseName);
         //分页设置
         query.setFirstResult(page.getStartIndex());
         query.setMaxResults(page.getPageSize());
-        List<Course> courseList =query.list();
+        List<Course> courseList = query.list();
         return courseList;
     }
 
@@ -149,7 +150,7 @@ public class CourseDaoImpl extends HibernateDaoSupport implements CourseDao {
      * @return
      */
     public Course selectByCourseId(Integer courseId) {
-        Course course = this.getCurrentSession().get(Course.class,courseId);
+        Course course = this.getCurrentSession().get(Course.class, courseId);
         return course;
     }
 
@@ -178,16 +179,28 @@ public class CourseDaoImpl extends HibernateDaoSupport implements CourseDao {
         return 0;
     }
 
+//    /**
+//     * 根据id查询课程
+//     * @param courseId
+//     * @return
+//     */
+//    public Course getCourseById(Integer courseId) {
+//       String hql="from Course where courseId=:n";
+//       Query query=this.getCurrentSession().createQuery(hql);
+//       query.setParameter("n",courseId);
+//       Course course=(Course) query.uniqueResult();
+//       return course;
+//    }
+
+
     /**
-     * 根据id查询课程
+     * 查询某个课程的先修课
+     *
      * @param courseId
      * @return
      */
-    public Course getCourseById(Integer courseId) {
-       String hql="from Course where courseId=:n";
-       Query query=this.getCurrentSession().createQuery(hql);
-       query.setParameter("n",courseId);
-       Course course=(Course) query.uniqueResult();
-       return course;
+    public Course getPreviousCourse(Integer courseId) {
+        Course course = this.getCurrentSession().get(Course.class, courseId);
+        return course;
     }
 }
