@@ -3,6 +3,7 @@ package com.fidofi.dao;
 import com.fidofi.entity.Course;
 import com.fidofi.entity.Selectcourses;
 import com.fidofi.entity.Student;
+import com.fidofi.service.SelectionCoursesService;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,5 +25,7 @@ public interface SelectCoursesDao {
     public Integer courseNum(String studentId);
 
     public Double courseCreditNum(String studentId);
+
+    public Selectcourses getSelectCourses(String studentId,Integer courseId);
 
 }

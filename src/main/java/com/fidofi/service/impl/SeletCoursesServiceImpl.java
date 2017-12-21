@@ -38,6 +38,12 @@ public class SeletCoursesServiceImpl implements SelectionCoursesService {
     public ResultVO<String> confirmCourse(Selectcourses selectcourses) {
         ResultVO<String> resultVO;
         try {
+            //判断是否已经存在了该选课记录
+            Selectcourses selectcourses_1 = selectCoursesDao.getSelectCourses(selectcourses.getStudentId(), selectcourses.getCourseId());
+            if (selectcourses_1 != null) {
+                resultVO = ResultVO.createBySuccess("该课程你已经选过了！");
+                return resultVO;
+            }
             Integer courseNum = selectCoursesDao.courseNum(selectcourses.getStudentId());
             //选课不能超过3门
             if (courseNum >= 3) {
@@ -45,6 +51,8 @@ public class SeletCoursesServiceImpl implements SelectionCoursesService {
                 return resultVO;
             }
             Double creditNum = selectCoursesDao.courseCreditNum(selectcourses.getStudentId());
+            if (creditNum == null)
+                creditNum = 0D;
             //查询该课程的信息，用作后续的条件判断
             Course course = courseDao.selectByCourseId(selectcourses.getCourseId());
             //选课的课程总学分不能超过5学分
@@ -58,7 +66,7 @@ public class SeletCoursesServiceImpl implements SelectionCoursesService {
                 return resultVO;
             }
             //判断是否有先行课
-            if (course.getPreviousId() != null || course.getPreviousId() != 0) {
+            if (course.getPreviousId() != null) {
                 //判断先行课是否修了
                 if (!majorCoursesDao.isMajor(course.getPreviousId(), selectcourses.getStudentId())) {
                     Course previousCourse = courseDao.selectByCourseId(course.getPreviousId());
@@ -73,8 +81,8 @@ public class SeletCoursesServiceImpl implements SelectionCoursesService {
 
         } catch (Exception e) {
             e.printStackTrace();
-            resultVO = ResultVO.createByError("选课操作失败");
-            return resultVO;
+            //这里要抛出异常，不然配置的事务不起作用
+            throw new RuntimeException("选课失败");
         }
     }
 
@@ -94,8 +102,8 @@ public class SeletCoursesServiceImpl implements SelectionCoursesService {
             return resultVO;
         } catch (Exception e) {
             e.printStackTrace();
-            resultVO = ResultVO.createByError("退选失败");
-            return resultVO;
+            //这里要抛出异常，不然配置的事务不起作用
+            throw new RuntimeException("退选失败");
         }
     }
 

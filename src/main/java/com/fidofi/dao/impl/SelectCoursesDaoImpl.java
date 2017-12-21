@@ -109,4 +109,19 @@ public class SelectCoursesDaoImpl implements SelectCoursesDao {
         return 0D;
     }
 
+    /**
+     * 查看选课记录是否存在
+     *
+     * @param studentId
+     * @param courseId
+     * @return
+     */
+    public Selectcourses getSelectCourses(String studentId, Integer courseId) {
+        String hql = "from Selectcourses where studentId=:n and courseId=:m";
+        Query query = this.getCurrentSession().createQuery(hql);
+        query.setParameter("n", studentId);
+        query.setParameter("m", courseId);
+        Selectcourses selectcourses = (Selectcourses) query.uniqueResult();
+        return selectcourses;
+    }
 }
