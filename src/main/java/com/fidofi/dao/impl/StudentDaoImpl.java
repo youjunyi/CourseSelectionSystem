@@ -27,13 +27,14 @@ public class StudentDaoImpl implements StudentDao {
     private Session getCurrentSession() {
         return this.sessionFactory.getCurrentSession();
     }
+
     /**
      * 录入学生账号
      *
      * @param student
      */
     public void save(Student student) {
-      this.getCurrentSession().save(student);
+        this.getCurrentSession().save(student);
     }
 
     /**
@@ -55,11 +56,11 @@ public class StudentDaoImpl implements StudentDao {
      * @return
      */
     public List<Student> selectStudent(Page page) {
-        String hql="from Student ";
-        Query query=this.getCurrentSession().createQuery(hql);
+        String hql = "from Student ";
+        Query query = this.getCurrentSession().createQuery(hql);
         query.setFirstResult(page.getStartIndex());
         query.setMaxResults(page.getPageSize());
-        List<Student> studentList =query.list();
+        List<Student> studentList = query.list();
         return studentList;
     }
 
@@ -79,11 +80,11 @@ public class StudentDaoImpl implements StudentDao {
      * @return
      */
     public Student selectById(String studentId) {
-      String hql="from Student where studentId=:n";
-      Query query=this.getCurrentSession().createQuery(hql);
-      query.setParameter("n",studentId);
-      Student student=(Student) query.uniqueResult();
-      return student;
+        String hql = "from Student where studentId=:n";
+        Query query = this.getCurrentSession().createQuery(hql);
+        query.setParameter("n", studentId);
+        Student student = (Student) query.uniqueResult();
+        return student;
     }
 
     /**
@@ -98,5 +99,21 @@ public class StudentDaoImpl implements StudentDao {
             return list.get(0).intValue();
         }
         return 0;
+    }
+
+    /**
+     * 学生登录，通过学号和密码验证
+     *
+     * @param studentId
+     * @param studentPassword
+     * @return
+     */
+    public Student login(String studentId, String studentPassword) {
+        String hql = "from Student where studentId=:n and studentPassword=:m";
+        Query query = this.getCurrentSession().createQuery(hql);
+        query.setParameter("n", studentId);
+        query.setParameter("m", studentPassword);
+        Student student = (Student) query.uniqueResult();
+        return student;
     }
 }

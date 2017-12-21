@@ -68,4 +68,10 @@ public class StudentDaoImplTest extends TestCase {
         System.out.println(studentDao.findCount());
     }
 
+   // @Test
+    public void testLogin(){
+        Student student=studentDao.login("3115638393","5638393");
+        System.out.println(student);
+    }
+
 }

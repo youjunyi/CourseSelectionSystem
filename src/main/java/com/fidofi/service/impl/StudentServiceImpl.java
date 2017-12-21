@@ -94,5 +94,22 @@ public class StudentServiceImpl implements StudentService {
     public ResultVO<Integer> findCount() {
         ResultVO<Integer> resultVO = ResultVO.createBySuccess(studentDao.findCount());
         return resultVO;
-}
+    }
+
+    public ResultVO<Student> login(String studentId, String studentPassword) {
+        ResultVO<Student> resultVO;
+        try {
+            Student student = studentDao.login(studentId, studentPassword);
+            if (student == null) {
+                resultVO = ResultVO.createBySuccess("学号或密码错误，请检查");
+                return resultVO;
+            }
+            resultVO = ResultVO.createBySuccess("登陆成功", student);
+            return resultVO;
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultVO = ResultVO.createByError("登录出现异常");
+            return resultVO;
+        }
+    }
 }

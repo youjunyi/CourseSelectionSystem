@@ -24,4 +24,6 @@ public interface StudentDao {
 
     public int findCount();
 
+    public Student login(String studentId,String studentPassword);
+
 }

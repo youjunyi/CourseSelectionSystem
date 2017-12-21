@@ -24,4 +24,6 @@ public interface StudentService {
 
     public ResultVO<Integer> findCount();
 
+    public ResultVO<Student> login(String studentId, String studentPassword);
+
 }

@@ -8,4 +8,12 @@
     <!--设置为true表明为在开发模式下-->
     <constant name="struts.devMode" value="true"/>
     <constant name="struts.objectFactory" value="spring"/>
+
+    <!--action配置-->
+    <package name="FidoAction" extends="struts-default" namespace="/">
+        <action name="student_*" class="com.fidofi.action.StudentAction" method="{1}" >
+            <result name="Login">/WEB-INF/jsp/front/student_login.jsp</result>
+            <result name="Index">/WEB-INF/jsp/front/student_index.jsp</result>
+        </action>
+    </package>
 </struts>
