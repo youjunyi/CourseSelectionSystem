@@ -24,4 +24,5 @@ public interface SelectCoursesDao {
     public Integer courseNum(String studentId);
 
     public Double courseCreditNum(String studentId);
+
 }

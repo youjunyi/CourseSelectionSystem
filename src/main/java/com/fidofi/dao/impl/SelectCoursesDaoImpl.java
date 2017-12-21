@@ -108,4 +108,5 @@ public class SelectCoursesDaoImpl implements SelectCoursesDao {
         }
         return 0D;
     }
+
 }

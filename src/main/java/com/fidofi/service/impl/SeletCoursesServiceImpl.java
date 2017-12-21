@@ -2,6 +2,7 @@ package com.fidofi.service.impl;
 
 import com.fidofi.VO.ResultVO;
 import com.fidofi.dao.CourseDao;
+import com.fidofi.dao.MajorCoursesDao;
 import com.fidofi.dao.SelectCoursesDao;
 import com.fidofi.entity.Course;
 import com.fidofi.entity.Selectcourses;
@@ -24,6 +25,8 @@ public class SeletCoursesServiceImpl implements SelectionCoursesService {
     private CourseDao courseDao;
     @Autowired
     private SelectCoursesDao selectCoursesDao;
+    @Autowired
+    private MajorCoursesDao majorCoursesDao;
 
     /**
      * 选课操作
@@ -33,7 +36,46 @@ public class SeletCoursesServiceImpl implements SelectionCoursesService {
      * @return
      */
     public ResultVO<String> confirmCourse(Selectcourses selectcourses) {
-        return null;
+        ResultVO<String> resultVO;
+        try {
+            Integer courseNum = selectCoursesDao.courseNum(selectcourses.getStudentId());
+            //选课不能超过3门
+            if (courseNum >= 3) {
+                resultVO = ResultVO.createBySuccess("选课已满3门，请退选其他课程再继续选课！");
+                return resultVO;
+            }
+            Double creditNum = selectCoursesDao.courseCreditNum(selectcourses.getStudentId());
+            //查询该课程的信息，用作后续的条件判断
+            Course course = courseDao.selectByCourseId(selectcourses.getCourseId());
+            //选课的课程总学分不能超过5学分
+            if (creditNum + course.getCredit() > 5) {
+                resultVO = ResultVO.createBySuccess("总学分已经超过5学分，请选择其他课程！");
+                return resultVO;
+            }
+            //选课的人数未满
+            if (course.getSelectNum() == course.getStudentNum()) {
+                resultVO = ResultVO.createBySuccess("选课人数已满，请选择其他课程！");
+                return resultVO;
+            }
+            //判断是否有先行课
+            if (course.getPreviousId() != null || course.getPreviousId() != 0) {
+                //判断先行课是否修了
+                if (!majorCoursesDao.isMajor(course.getPreviousId(), selectcourses.getStudentId())) {
+                    Course previousCourse = courseDao.selectByCourseId(course.getPreviousId());
+                    resultVO = ResultVO.createBySuccess("请先修" + previousCourse.getCourseName() + "这门课");
+                    return resultVO;
+                }
+            }
+            selectCoursesDao.confirmCourse(selectcourses);
+            courseDao.confirmCourse(selectcourses.getCourseId());
+            resultVO = ResultVO.createBySuccess("选课成功");
+            return resultVO;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultVO = ResultVO.createByError("选课操作失败");
+            return resultVO;
+        }
     }
 
     /**
@@ -44,7 +86,17 @@ public class SeletCoursesServiceImpl implements SelectionCoursesService {
      * @return
      */
     public ResultVO<String> cancelCourse(Selectcourses selectcourses) {
-        return null;
+        ResultVO<String> resultVO;
+        try {
+            courseDao.cancelCourse(selectcourses.getCourseId());
+            selectCoursesDao.cancelCourse(selectcourses);
+            resultVO = ResultVO.createBySuccess("退选成功");
+            return resultVO;
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultVO = ResultVO.createByError("退选失败");
+            return resultVO;
+        }
     }
 
     /**

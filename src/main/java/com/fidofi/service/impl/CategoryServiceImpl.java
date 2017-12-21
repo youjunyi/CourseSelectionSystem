@@ -2,6 +2,7 @@ package com.fidofi.service.impl;
 
 import com.fidofi.VO.ResultVO;
 import com.fidofi.dao.CategoryDao;
+import com.fidofi.dao.CourseDao;
 import com.fidofi.entity.Category;
 import com.fidofi.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Autowired
     private CategoryDao categoryDao;
+
+    @Autowired
+    private CourseDao courseDao;
 
     public ResultVO<String> create(Category category) {
         ResultVO<String> resultVO;
@@ -106,4 +110,5 @@ public class CategoryServiceImpl implements CategoryService {
             return resultVO;
         }
     }
+
 }

@@ -1,6 +1,7 @@
 package com.fidofi.dao.impl;
 
 import com.fidofi.dao.MajorCoursesDao;
+import com.fidofi.entity.Course;
 import com.fidofi.entity.Majorcourses;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -22,20 +23,20 @@ public class MajorCoursesDaoImplTest extends TestCase {
     private MajorCoursesDao majorCoursesDao;
 
     //@Test
-    public void testGetByStudent() throws Exception {
-          List<Majorcourses> majorcoursesList= majorCoursesDao.getByStudent("3215703657");
-          for(Majorcourses majorcourses:majorcoursesList){
-              System.out.println(majorcourses);
-          }
-    }
+//    public void testGetByStudent() throws Exception {
+//          List<Course> courseList= majorCoursesDao.getByStudent("3215703657");
+//          for(Course course:courseList){
+//              System.out.println(course);
+//          }
+//    }
 
   //  @Test
-    public void testGetByCourse() throws Exception {
-        List<Majorcourses> majorcoursesList= majorCoursesDao.getByCourse(5);
-        for(Majorcourses majorcourses:majorcoursesList){
-            System.out.println(majorcourses);
-        }
-    }
+//    public void testGetByCourse() throws Exception {
+//        List<Majorcourses> majorcoursesList= majorCoursesDao.getByCourse(5);
+//        for(Majorcourses majorcourses:majorcoursesList){
+//            System.out.println(majorcourses);
+//        }
+//    }
 
    // @Test
     public void testIsMajor() throws Exception {

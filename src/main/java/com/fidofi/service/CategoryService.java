@@ -1,6 +1,5 @@
 package com.fidofi.service;
 
-import com.fidofi.VO.CategoryAndCourses;
 import com.fidofi.VO.ResultVO;
 import com.fidofi.entity.Category;
 
@@ -21,4 +20,5 @@ public interface CategoryService {
     public ResultVO<Category> getCategoryById(Integer categoryId);
 
     public ResultVO<Category> getCategoryByName(String categoryName);
+
 }
