@@ -112,4 +112,17 @@ public class StudentServiceImpl implements StudentService {
             return resultVO;
         }
     }
+
+    public ResultVO<String> changePassword(String studentId, String studentPassword) {
+        ResultVO<String> resultVO;
+        try {
+            studentDao.changePassword(studentId, studentPassword);
+            resultVO = ResultVO.createBySuccess("更改密码成功，请重新登录");
+            return resultVO;
+        } catch (Exception e) {
+            e.printStackTrace();
+            resultVO = ResultVO.createByError("更改密码出现异常");
+            return resultVO;
+        }
+    }
 }

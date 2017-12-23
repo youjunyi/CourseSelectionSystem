@@ -39,12 +39,20 @@ public class StudentDaoImpl implements StudentDao {
 
     /**
      * 更新学生信息
+     * 可供学生更新的：
+     * 学生住址和电话
      *
      * @param student
      * @return
      */
     public Student update(Student student) {
-        this.getCurrentSession().update(student);
+
+        String hql = "update Student set address=:n,phone=:m where studentId=:l";
+        Query query = this.getCurrentSession().createQuery(hql);
+        query.setParameter("n", student.getAddress());
+        query.setParameter("m", student.getPhone());
+        query.setParameter("l", student.getStudentId());
+        query.executeUpdate();
         Student newStudent = this.selectById(student.getStudentId());
         return newStudent;
     }
@@ -115,5 +123,19 @@ public class StudentDaoImpl implements StudentDao {
         query.setParameter("m", studentPassword);
         Student student = (Student) query.uniqueResult();
         return student;
+    }
+
+    /**
+     * 学生更改密码
+     *
+     * @param studentId
+     * @param studentPassword
+     */
+    public void changePassword(String studentId, String studentPassword) {
+        String hql = "update Student set studentPassword=:n where studentId=:m";
+        Query query = this.getCurrentSession().createQuery(hql);
+        query.setParameter("n", studentPassword);
+        query.setParameter("m", studentId);
+        query.executeUpdate();
     }
 }

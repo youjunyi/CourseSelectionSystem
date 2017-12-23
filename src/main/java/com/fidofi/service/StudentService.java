@@ -26,4 +26,6 @@ public interface StudentService {
 
     public ResultVO<Student> login(String studentId, String studentPassword);
 
+    public ResultVO<String> changePassword(String studentId, String studentPassword);
+
 }

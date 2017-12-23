@@ -20,13 +20,13 @@
                     <div class="form-group">
                         <div class="col-sm-10">
                             <label> 学号:</label><input type="text" class="form-control" name="student.studentId"
-                                                      placeholder=".col-xs-5"/>
+                                                      placeholder="请输入学号"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-10">
                             <label> 密码:</label> <input type="password" class="form-control" name="student.studentPassword"
-                                                       placeholder=".col-xs-5"/>
+                                                       placeholder="请输入密码"/>
                         </div>
                     </div>
                     <div class="form-group">

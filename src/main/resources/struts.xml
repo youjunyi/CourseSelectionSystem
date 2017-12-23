@@ -11,9 +11,12 @@
 
     <!--action配置-->
     <package name="FidoAction" extends="struts-default" namespace="/">
-        <action name="student_*" class="com.fidofi.action.StudentAction" method="{1}" >
+        <action name="student_*" class="com.fidofi.action.StudentAction" method="{1}">
             <result name="Login">/WEB-INF/jsp/front/student_login.jsp</result>
             <result name="Index">/WEB-INF/jsp/front/student_index.jsp</result>
+            <result name="Information">/WEB-INF/jsp/front/student_information.jsp</result>
+            <result name="SelectCourses">/WEB-INF/jsp/front/student_index.jsp</result>
+            <result name="CoursesScore">/WEB-INF/jsp/front/student_coursesScore.jsp</result>
         </action>
     </package>
 </struts>

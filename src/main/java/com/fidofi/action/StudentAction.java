@@ -15,6 +15,8 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class StudentAction extends ActionSupport {
     private Student student;
+    //此对象可以获得request,session
+    private ActionContext cxt = ActionContext.getContext();
 
     @Autowired
     private StudentService studentService;
@@ -27,8 +29,8 @@ public class StudentAction extends ActionSupport {
         this.student = student;
     }
 
-    //首页
-    public String studentIndex() {
+    //跳转到登录界面
+    public String index() {
         return "Login";
     }
 
@@ -36,10 +38,36 @@ public class StudentAction extends ActionSupport {
     public String login() {
         ResultVO<Student> resultVO = studentService.login(student.getStudentId(), student.getStudentPassword());
         if (resultVO.getData() == null) {
-            ActionContext cxt = ActionContext.getContext();
+            //登录不成功，返回错误信息
             cxt.put("loginMesg", resultVO.getMessage());
             return "Login";
-        } else
+        } else {
+            //登录成功，将学生信息放入session
+            cxt.getSession().put("student", resultVO.getData());
             return "Index";
+        }
     }
+
+    //跳转到选课界面
+    public String selectCourses() {
+        return "SelectCourses";
+    }
+
+    //跳转到个人信息界面
+    public String informations() {
+        return "Information";
+    }
+
+    //跳转到课程成绩界面
+    public String coursesScore() {
+        return "CoursesScore";
+    }
+
+    //处理个人信息更新
+    public String updateInfo(){
+        studentService.update(student);
+        return "Information";
+    }
+
+
 }

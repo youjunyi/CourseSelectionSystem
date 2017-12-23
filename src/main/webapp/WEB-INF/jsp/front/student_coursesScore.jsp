@@ -4,8 +4,7 @@
 <%@include file="header.jsp" %>
 <html>
 <head>
-    <title>选课系统首页</title>
-    <link href="https://cdn.bootcss.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
+    <title>课程成绩查询</title>
 </head>
 <body>
 
